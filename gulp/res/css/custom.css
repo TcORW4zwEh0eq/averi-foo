@@ -1,0 +1,9 @@
+#settings::after {
+	content: attr(data-label);
+}
+
+@media only screen and (max-width: 600px) {
+	#settings::after {
+		content: "\2699"!important;
+	}
+}
