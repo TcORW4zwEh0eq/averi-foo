@@ -28,33 +28,34 @@ module.exports = async (req, res) => {
 				message = `Deleted file ${filehash}`;
 				log_message = message;
 				break;
-			case 'nsfw':
+			case '1hr':
+				req.body.delete_file = true; // delete files
+				req.body.delete = true; // delete post
+				req.body.ban = true;
+				req.body.ban_duration = 3600000; // 1 hour in ms
+				req.body.ban_reason = 'Media approval denied.';
+				req.body.no_appeal = true;
+				message = `Denied (1hr ban) ${filehash}`;
+				log_message = message;
+				break;
+			case '3d':
 				req.body.delete_file = true; // delete files
 				req.body.delete = true; // delete post
 				req.body.global_ban = true;
-				req.body.ban_duration = 86400000 * 3; // ban 3 day in ms
-				req.body.ban_reason = `Uploaded NSFW hash ${filehash} that was denied`;
+				req.body.ban_duration = 86400000 * 3; // 3 days in ms
+				req.body.ban_reason = 'Media approval denied; Severe and/or repeated.';
 				req.body.no_appeal = false;
-				message = `Denied NSFW ${filehash}`;
+				message = `Denied (3d global ban) ${filehash}`;
 				log_message = message;
 				break;
-			case 'illegal':
-				req.body.delete_file = true; // delete files
-				req.body.delete = true; // delete post
-				req.body.global_ban = true; // ban with duration of 1 year
-				req.body.ban_reason = `Uploaded ILLEGAL hash ${filehash} that was denied`;
-				req.body.no_appeal = false;
-				message = `Denied ILLEGAL ${filehash}`;
-				log_message = message;
-				break;
-			case 'artificial':
+			case '1y':
 				req.body.delete_file = true; // delete files
 				req.body.delete = true; // delete post
 				req.body.global_ban = true;
-				req.body.ban_duration = 3600000 // 1 hour ban
-				req.body.ban_reason = `Uploaded AI ART hash ${filehash} that was denied`;
+				req.body.ban_duration = 31536000000; // 1 year in ms
+				req.body.ban_reason = 'Media approval denied; Very severe.';
 				req.body.no_appeal = false;
-				message = `Denied AI ART ${filehash}`;
+				message = `Denied (1y global ban) ${filehash}`;
 				log_message = message;
 				break;
 		}
