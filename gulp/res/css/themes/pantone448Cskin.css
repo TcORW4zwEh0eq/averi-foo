@@ -1,0 +1,66 @@
+/*nigger*/
+:root {
+	--icon-color: invert(17%) sepia(89%) saturate(7057%) hue-rotate(2deg) brightness(93%) contrast(120%);
+	--alt-label-color: #f0dfc0;
+	--alt-font-color: #1e1508;
+	--background-top: #1e1508;
+	--background-rest: #1e1508;
+	--navbar-color: #2a1f0e;
+	--post-color: #2a1f0e;
+	--post-outline-color: #3d2e14;
+	--label-color: #2a1f0e;
+	--box-border-color: #110d04;
+	--darken: #ffffff10;
+	--highlighted-post-color: #3d2400;
+	--highlighted-post-outline-color: #5c3a00;
+	--board-title: #f0dfc0;
+	--hr: #2a1f0e;
+	--font-color: #f0dfc0;
+	--name-color: #29d734;
+	--capcode-color: #f00;
+	--subject-color: #f62e22;
+	--link-color: #f0dfc0;
+	--post-link-color: #c8860a;
+	--link-hover: #f0a030;
+	--accent-color: #f0dfc0;
+	--input-borders: #110d04;
+	--input-color: #f0dfc0;
+	--input-background: #241a07;
+	--dice-color: darkorange;
+	--title-color: #e8900a;
+	--greentext-color: #8aaa50;
+	--pinktext-color: #E0727F;
+}
+
+.anchor:target + .post-container, .post-container.highlighted {
+	border: 1px solid var(--highlighted-post-outline-color);
+}
+
+#float .post-container, #livetext, #threadstats, .navbar, .catalog-tile, .pages, .post-container, .stickynav, .collapse, .bottom-reply {
+	border-width: 1px;
+	border-color: black;
+}
+
+.navbar {
+	box-shadow: 0 0 3px 0px #00000030;
+}
+
+.post-container.op {
+	border-color: transparent;
+}
+
+table {
+	border-spacing: 0px;
+}
+
+tr:nth-child(2n+1) {
+	background: unset;
+}
+
+.captcha {
+	filter: invert(90%);
+}
+
+.box-wrap, .tabs li a {
+	border: 1px solid #000;
+}

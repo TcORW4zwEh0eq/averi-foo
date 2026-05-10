@@ -25,7 +25,7 @@
 		margin: 0 auto;
 	}
 	.stickynav {
-		right: calc((100vw - 1200px) / 2 + 5px);
+		right: calc((100vw - 1200px) / 2 + 50px);
 	}
 }
 
@@ -49,3 +49,34 @@
 		margin-left:4em
 	}
 }
+
+@media only screen and (max-width: 600px) {
+        .post-info {
+                background: none;
+                border-bottom: none;
+        }
+        .anchor:target + .post-container .post-info, .post-container.highlighted .post-info {
+                border-bottom: none;
+        }
+}
+
+/* compact file info: (size, res) on line 1 / [Show/Hide] Save Reverse on line 2 */
+
+.post-file-info > span {
+	display: flex;
+	align-items: baseline;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 4px;
+}
+.post-file-info br { display: none; }
+.post-file-info > span > a:first-of-type { display: none; }
+.post-file-info > span > span:first-of-type { order: 1; }
+.post-file-info > span > span:nth-of-type(2) { order: 4; width: 100%; text-align: center; font-size: xx-small; white-space: nowrap; }
+.post-file-info > span > a:last-of-type { order: 2; font-size: 0; }
+.post-file-info > span > a:last-of-type::after { content: 'Save'; font-size: xx-small; }
+.post-file-reverse { order: 3; }
+.post-file-reverse a { font-size: 0; }
+.post-file-reverse a::after { content: 'Rev'; font-size: xx-small; }
+.post-file-info a.hide-image { font-size: xx-small; }
+.post-file-info .jsonly b { font-size: xx-small; }
