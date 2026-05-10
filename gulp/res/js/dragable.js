@@ -20,7 +20,7 @@ class Dragable {
 		this.target.style.right = 'unset';
 		this.target.addEventListener('opened', e => this.updateMaxSizes(e));
 		this.handle.addEventListener('mousedown', e => this.startDrag(e));
-		this.handle.addEventListener('touchstart', e => this.startDrag(e), {passive: true});
+		this.handle.addEventListener('touchstart', e => this.startDrag(e), {passive: false});
 		document.addEventListener('mouseup', e => this.stopDrag(e));
 		document.addEventListener('touchend', e => this.stopDrag(e));
 		window.addEventListener('resize', e => this.updateMaxSizes(e));
@@ -73,7 +73,7 @@ class Dragable {
 				e.stopPropagation();
 				this.xo = e.targetTouches[0].clientX - rect.left;
 				this.yo = e.targetTouches[0].clientY - rect.top;
-				window.addEventListener('touchmove', e => this.doDrag(e));
+				window.addEventListener('touchmove', e => this.doDrag(e), {passive: false});
 				break;
 			default:
 				//user has alien technology
