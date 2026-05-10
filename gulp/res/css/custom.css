@@ -1,3 +1,5 @@
+/* revert navbar to text labels from images */
+
 #settings::after {
 	content: attr(data-label);
 }
@@ -8,7 +10,42 @@
 	}
 }
 
+/* get rid of janny mpa thumbnail hiding */
+
 .overlay-text+.post-file-src .file-thumb,
 .overlay-text+.post-file-src .catalog-thumb {
 	content: unset !important;
+}
+
+/* moreso centre elemnts on screen with wide viewports */
+
+@media only screen and (min-width: 1200px) {
+	.container {
+		max-width: 1100px;
+		margin: 0 auto;
+	}
+	.stickynav {
+		right: calc((100vw - 1200px) / 2 + 5px);
+	}
+}
+
+@media only screen and (min-width: 600px) {
+	nav.navbar {
+		display: flex;
+		justify-content: center;
+	}
+	nav.navbar::before {
+		content: '';
+		flex: 1;
+	}
+	nav.navbar::after {
+		content: '';
+		flex: 1;
+	}
+}
+
+@media only screen and (min-width:725px) {
+	.thread>.post-container:not(.op) {
+		margin-left:4em
+	}
 }
