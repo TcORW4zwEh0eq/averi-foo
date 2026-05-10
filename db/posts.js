@@ -1026,7 +1026,8 @@ module.exports = {
 		if (getRandomImage[0] === undefined) {
 			return false
 		}
-		return getRandomImage[0].file.filename
+		const f = getRandomImage[0].file;
+		return { hash: f.hash, thumbextension: f.thumbextension }
 	},
 
 	randomTegaki: async () => {

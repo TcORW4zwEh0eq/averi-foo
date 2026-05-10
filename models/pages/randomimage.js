@@ -15,6 +15,6 @@ module.exports = async (req, res, next) => {
 		return res.redirect('/file/defaultimage.png');
 	}
 
-	return res.redirect(`/file/${randimage}`);
+	return res.redirect(`/file/thumb/${randimage.hash}${randimage.thumbextension}`);
 
 };
