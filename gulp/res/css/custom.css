@@ -58,6 +58,33 @@
         .anchor:target + .post-container .post-info, .post-container.highlighted .post-info {
                 border-bottom: none;
         }
+        .postmenu-wrap {
+                position: relative;
+                display: inline-block;
+                width: 1.5em;
+                height: 1.5em;
+                vertical-align: middle;
+        }
+        .postmenu-icon {
+                position: absolute;
+                inset: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: xx-small;
+                pointer-events: none;
+                color: var(--font-color);
+        }
+        .postmenu-wrap .postmenu {
+                position: absolute;
+                inset: 0;
+                opacity: 0;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                cursor: pointer;
+        }
 }
 
 /* compact file info: (size, res) on line 1 / [Show/Hide] Save Reverse on line 2 */
