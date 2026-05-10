@@ -7,3 +7,8 @@
 		content: "\2699"!important;
 	}
 }
+
+.overlay-text+.post-file-src .file-thumb,
+.overlay-text+.post-file-src .catalog-thumb {
+	content: unset !important;
+}
