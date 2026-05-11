@@ -1,10 +1,6 @@
-<p align="center">
- <img src="https://averi.foo/file/homepage-icon.png" width=250px>
-</p>
-<p align="center">
- <img src="https://skillicons.dev/icons?i=cloudflare,nodejs" width=180px>
-</p>
+Averi-foo added a media approval system to jschan which is useful.
 
+Making changes for my own install. Not using Docker or a VM. Using Apache instead of Nginx.
 
 
 Averi.foo is a custom fork of jschan, an imageboard software by Thomas Lynch.
@@ -16,8 +12,11 @@ Repo Mirror(s):
 Contact the author:
  - Email: administration@averi.foo
 
-## Live instance
+## Live instance of averi-foo
  - https://averi.foo
+
+## Live instance of jschan
+ - https://zzzchan.xyz
 
 ## Features
  - [x] File approval system

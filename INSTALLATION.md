@@ -1,5 +1,75 @@
 # Installation
-<img src="https://raw.githubusercontent.com/averi-foo/averi-foo/refs/heads/main/gulp/res/css/themes/assets/averi-wave.png" alt="drawing" style="height:400px;"/>
+##### This guide is shite. Don't bother with docker, nginx unless you're already using it, or a virtual machine.
+
+##### Here is a working Apache vhosts file as of May 2026
+```
+# Sub $DOM with your domain
+# Sub /home/user0/averi-foo with wherever you put it
+
+<VirtualHost *:80>
+    ServerName $DOM
+    RewriteEngine On
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=301,L]
+</VirtualHost>
+
+<VirtualHost *:443>
+    ServerName $DOM
+
+    SSLEngine on
+    SSLCertificateFile /etc/letsencrypt/live/$DOM/fullchain.pem
+    SSLCertificateKeyFile /etc/letsencrypt/live/$DOM/privkey.pem
+
+    RewriteEngine On
+
+    # Serve static files directly from disk
+    Alias /css /home/user0/averi-foo/static/css
+    Alias /js /home/user0/averi-foo/static/js
+    Alias /file /home/user0/averi-foo/static/file
+    Alias /html /home/user0/averi-foo/static/html
+
+    <Directory /home/user0/averi-foo/static/>
+        Require all granted
+        Options -Indexes
+    </Directory>
+
+    # Needed for proxying to and from a VPS with intact original source address
+    # You can probably safely leave these in and probably need X-Forward-For anyway
+    RequestHeader unset X-Real-IP
+    RequestHeader unset X-Forwarded-For
+    RequestHeader set X-Real-IP "%{REMOTE_ADDR}s"
+    RequestHeader set X-Forwarded-Proto "https"
+
+    # Exclude static paths from proxy, forward everything else to Node.js
+    ProxyPreserveHost On
+    ProxyPass /css !
+    ProxyPass /js !
+    ProxyPass /file !
+    ProxyPass /html !
+
+    # Exclude certbot paths from proxy
+    # As the user apache runs as (apache, www-server, etc.)
+    # sudo -u apache mkdir -p /var/www/certbot/.well-known/acme-channenge
+    Alias /.well-known/acme-challenge/ /var/www/certbot/.well-known/acme-challenge/
+    ProxyPass /.well-known/acme-challenge/ !
+    <Directory /var/www/certbot/.well-known/acme-challenge/>
+        Require all granted
+        Options -Indexes
+    </Directory>
+
+    # Proxy all else
+    # WebSocket connections
+    #RewriteCond %{HTTP:Upgrade} websocket [NC]
+    #RewriteCond %{HTTP:Connection} upgrade [NC]
+    #RewriteRule ^/socket.io/(.*) ws://127.0.0.1:7000/socket.io/$1 [P,L]
+
+    ProxyPass /socket.io/ http://127.0.0.1:7000/socket.io/ upgrade=websocket
+    ProxyPassReverse /socket.io/ http://127.0.0.1:7000/socket.io/
+
+    RewriteRule ^/$ /index.html [R=302,L]
+    ProxyPass / http://127.0.0.1:7000/
+    ProxyPassReverse / http://127.0.0.1:7000/
+</VirtualHost>
+```
 
 ##### Make sure to follow the instructions carefully, failing to do so could cause the installation to fail or need reparing.
 This is a guide for installing averi.foo onto your own local virtual machine for the purpose of helping develop more features for the site, or just having an environment to screw around in so you don't accidentally ruin the production service, etc. These instructions were originally written by Thomas Lynch, creator of JSChan, but I have decided to modify some of it to give some additional information on my experience installing jschan. If you need any help, feel free to ask me on /q/
